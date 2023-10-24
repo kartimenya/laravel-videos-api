@@ -9,11 +9,11 @@ class ChannelController extends Controller
 {
     public function index()
     {
-        return Channel::query()->with('videos')->get();
+        return Channel::query()->with('user', 'videos')->get();
     }
 
     public function show(Channel $channel)
     {
-        return $channel->load('videos');
+        return $channel->load('user', 'videos');
     }
 }
