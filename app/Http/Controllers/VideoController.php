@@ -2,23 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\Period;
 use App\Models\Video;
 
 class VideoController extends Controller
 {
     public function index()
     {
-        $date = match (request('period')) {
-            'year' => now()->startOfYear(),
-            'month' => now()->startOfMonth(),
-            'week' => now()->startOfWeek(),
-            'day' => now()->startOfDay(),
-            'hour' => now()->startOfHour(),
-            default => null,
-        };
+        $period = Period::tryFrom(request('period'));
 
-        return $date
-            ? Video::query()->where('created_at', '>=', $date)->count()
+        return $period
+            ? Video::query()->where('created_at', '>=', $period->date())->count()
             : Video::query()->count();
     }
 
