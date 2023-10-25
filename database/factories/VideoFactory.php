@@ -17,7 +17,10 @@ class VideoFactory extends Factory
      */
     public function definition(): array
     {
-        $createdAt = $this->faker->dateTimeThisYear();
+        $period = $this->faker->randomElement(['year', 'month', 'week', 'day']);
+
+        $createdAt = $this->faker->dateTimeBetween("-1 $period");
+
         return [
             'title' => ucfirst($this->faker->words(3, true)),
             'channel_id' => Channel::query()->inRandomOrder()->first(),

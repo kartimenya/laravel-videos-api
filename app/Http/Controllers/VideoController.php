@@ -8,7 +8,18 @@ class VideoController extends Controller
 {
     public function index()
     {
-        return Video::query()->with('channel', 'categories')->get();
+        $date = match (request('period')) {
+            'year' => now()->startOfYear(),
+            'month' => now()->startOfMonth(),
+            'week' => now()->startOfWeek(),
+            'day' => now()->startOfDay(),
+            'hour' => now()->startOfHour(),
+            default => null,
+        };
+
+        return $date
+            ? Video::query()->where('created_at', '>=', $date)->count()
+            : Video::query()->count();
     }
 
     public function show(Video $video)
