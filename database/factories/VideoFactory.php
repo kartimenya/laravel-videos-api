@@ -23,6 +23,7 @@ class VideoFactory extends Factory
 
         return [
             'title' => ucfirst($this->faker->words(3, true)),
+            'description' => $this->faker->sentences(3, true),
             'channel_id' => Channel::query()->inRandomOrder()->first(),
             'created_at' => $createdAt,
             'updated_at' => $createdAt,

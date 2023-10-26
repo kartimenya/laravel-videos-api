@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Enums\Period;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -24,8 +25,16 @@ class Video extends Model
         return $this->belongsToMany(Category::class);
     }
 
-    public function scopeFromPeriod($query, ?Period $period)
+    public function scopeFromPeriod(Builder $query, ?Period $period): Builder
     {
         return $period ? $query->where('created_at', '>=', $period->date()) : $query;
+    }
+
+    public function scopeSearch(Builder $query, ?string $text): Builder
+    {
+        return $query->where(function ($query) use ($text){
+            $query->where('title', 'like', '%'.$text.'%')
+                ->orWhere('description', 'like', '%'.$text.'%');
+        });
     }
 }
