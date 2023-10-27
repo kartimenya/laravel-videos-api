@@ -3,6 +3,7 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -46,5 +47,13 @@ class User extends Authenticatable
     public function channel()
     {
         return $this->hasOne(Channel::class);
+    }
+
+    public function scopeSearch(Builder $query, ?string $text)
+    {
+        return $query->where(function ($query) use ($text){
+            $query->where('name', 'like', '%'.$text.'%')
+                ->orWhere('email', 'like', '%'.$text.'%');
+        });
     }
 }

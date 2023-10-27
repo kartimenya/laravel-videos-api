@@ -9,11 +9,15 @@ class CategoryController extends Controller
 {
     public function index()
     {
-        return Category::query()->with('videos')->get();
+        return Category::query()
+            ->with(request('with', []))
+            ->search(request('query'))
+            ->orderBy(request('sort', 'name'), request('order', 'asc'))
+            ->simplePaginate(request('limit'));
     }
 
     public function show(Category $category)
     {
-        return $category->load('videos');
+        return $category->load(request('with', []));
     }
 }
