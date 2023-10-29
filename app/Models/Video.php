@@ -3,17 +3,16 @@
 namespace App\Models;
 
 use App\Enums\Period;
+use App\Traits\WithRelationship;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Video extends Model
 {
-    use HasFactory;
+    use HasFactory, WithRelationship;
 
-    public static function fromPeriod(?\App\Enums\Period $period)
-    {
-    }
+    protected static array $relationships = ['channel', 'playlists', 'categories'];
 
     public function channel()
     {

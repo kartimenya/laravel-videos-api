@@ -2,13 +2,16 @@
 
 namespace App\Models;
 
+use App\Traits\WithRelationship;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Playlist extends Model
 {
-    use HasFactory;
+    use HasFactory, WithRelationship;
+
+    protected static array $relationships = ['channel', 'videos'];
 
     public function channel()
     {
