@@ -14,27 +14,7 @@ class CategoryVideoSeeder extends Seeder
     /**
      * Run the database seeds.
      */
-//    public function run(): void
-//    {
-//        $categoryIds = Category::query()->pluck('id')->all();
-//        $videoIds = Video::query()->pluck('id')->all();
-//
-//        $categoryVideo = [];
-//
-//        foreach ($categoryIds as $categoryId) {
-//            $randomVideoIds = Arr::random($videoIds, mt_rand(1, count($videoIds)));
-//
-//            foreach ($randomVideoIds as $videoId) {
-//                $categoryVideo[] = [
-//                    'category_id' => $categoryId,
-//                    'video_id' => $videoId
-//                ];
-//            }
-//        }
-//
-//        DB::table('category_video')->insert($categoryVideo);
-//    }
-
+    
     public function run(): void
     {
         $categoryIds = Category::query()->pluck('id');

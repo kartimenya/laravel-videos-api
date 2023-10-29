@@ -6,23 +6,18 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Channel extends Model
+class Playlist extends Model
 {
     use HasFactory;
 
-    public function playlists()
+    public function channel()
     {
-        return $this->hasMany(Playlist::class);
+        return $this->belongsTo(Channel::class);
     }
 
     public function videos()
     {
-        return $this->hasMany(Video::class);
-    }
-
-    public function user()
-    {
-        return $this->belongsTo(User::class);
+        return $this->belongsToMany(Video::class);
     }
 
     public function scopeSearch(Builder $query, ?string $name)

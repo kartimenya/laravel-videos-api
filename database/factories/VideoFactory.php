@@ -19,8 +19,8 @@ class VideoFactory extends Factory
     public function definition(): array
     {
         return [
-            'title' => ucfirst(fake()->words(3, true)),
-            'description' => fake()->sentences(3, true),
+            'title' => ucfirst(fake()->words(mt_rand(1, 2), true)),
+            'description' => fake()->sentences(mt_rand(1, 3), true),
             'channel_id' => Channel::query()->inRandomOrder()->first(),
         ];
     }
