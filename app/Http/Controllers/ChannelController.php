@@ -18,6 +18,6 @@ class ChannelController extends Controller
 
     public function show(Channel $channel)
     {
-        return $channel->load(request('with', []));
+        return $channel->loadRelationships(request('with', []));
     }
 }

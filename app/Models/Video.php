@@ -29,6 +29,11 @@ class Video extends Model
         return $this->belongsToMany(Category::class);
     }
 
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
+
     public function scopeFromPeriod(Builder $query, ?Period $period): Builder
     {
         return $period ? $query->where('created_at', '>=', $period->date()) : $query;

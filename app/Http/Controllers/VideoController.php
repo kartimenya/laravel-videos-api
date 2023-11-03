@@ -20,6 +20,6 @@ class VideoController extends Controller
 
     public function show(Video $video): Video
     {
-        return $video->load(request('with', []));
+        return $video->loadRelationships(request('with', []));
     }
 }
