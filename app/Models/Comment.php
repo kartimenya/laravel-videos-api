@@ -41,4 +41,9 @@ class Comment extends Model
     {
         return $this->belongsTo(Video::class);
     }
+
+    public function isOwenBy(User $user)
+    {
+        return $this->user_id === $user->id;
+    }
 }
